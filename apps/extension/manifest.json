@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "description": "Forms, without the busywork. Fillin understands the forms you fill and uses the information you provided once.",
   "minimum_chrome_version": "116",
-  "permissions": ["sidePanel", "activeTab", "scripting", "storage"],
+  "permissions": ["sidePanel", "activeTab", "tabs", "scripting", "storage"],
   "background": {
     "service_worker": "background.js",
     "type": "module"
