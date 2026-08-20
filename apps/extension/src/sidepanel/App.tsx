@@ -247,6 +247,13 @@ export default function App() {
     onContentMessage(() => {
       void refresh();
     });
+    const onTabChanged = (msg: { type?: string; tabId?: number; url?: string }) => {
+      if (msg.type === "FILLIN_TAB_CHANGED") {
+        void refresh();
+      }
+    };
+    chrome.runtime.onMessage.addListener(onTabChanged);
+    return () => chrome.runtime.onMessage.removeListener(onTabChanged);
   }, [refresh, set]);
 
   const fill = useCallback(async () => {
