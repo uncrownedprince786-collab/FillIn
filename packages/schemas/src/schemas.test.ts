@@ -48,8 +48,8 @@ describe("schemas", () => {
 
   it("parses settings and applies defaults", () => {
     const parsed = AppSettingsSchema.parse(DEFAULT_SETTINGS);
-    expect(parsed.apiBaseUrl).toBe("http://localhost:3000");
-    expect(parsed.encryptDocuments).toBe(true);
+    expect(parsed.apiBaseUrl).toBe("https://fill-in-psi.vercel.app");
+    expect(parsed.encryptDocuments).toBe(false);
   });
 
   it("parses a field decision", () => {

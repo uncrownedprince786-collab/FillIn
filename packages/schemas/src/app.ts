@@ -27,7 +27,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   autoExtract: true,
   confirmBeforeFill: true,
   neverOverwrite: true,
-  encryptDocuments: true,
+  encryptDocuments: false,
 };
 
 // ---------------------------------------------------------------------------

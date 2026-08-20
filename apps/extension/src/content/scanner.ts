@@ -230,12 +230,21 @@ function collectCandidates(root: ParentNode): Element[] {
 }
 
 export function scanDocument(opts: ScanOptions = {}): FieldSnapshot {
-  const roots: ParentNode[] = opts.wholeDocument
+  let roots: ParentNode[] = opts.wholeDocument
     ? [document]
     : Array.from(document.forms);
   const fields: DetectedField[] = [];
   for (const root of roots) {
     for (const el of collectCandidates(root)) {
+      const detected =
+        el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT"
+          ? detectNativeField(el)
+          : detectCustomControl(el);
+      if (detected) fields.push(detected);
+    }
+  }
+  if (fields.length === 0 && !opts.wholeDocument) {
+    for (const el of collectCandidates(document)) {
       const detected =
         el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT"
           ? detectNativeField(el)

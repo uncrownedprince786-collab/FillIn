@@ -31,7 +31,7 @@ export default function FormView() {
   if (!app.plan) {
     return (
       <div className="empty">
-        <p>Open a page with a form and refresh to see it here.</p>
+        <p>Open a web page with a form, then click below.</p>
         <button className="btn primary" onClick={() => void app.refresh()}>
           Scan this page
         </button>

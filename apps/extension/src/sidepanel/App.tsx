@@ -176,7 +176,9 @@ export default function App() {
           activeUrl: tab?.url ?? null,
           plan: null,
           scanning: false,
-          scanError: "Fillin can't access this page. Open a web page with a form to continue.",
+          scanError: tab?.url?.startsWith("chrome")
+            ? "Switch to a web page with a form, then click Try again."
+            : "This page can't be filled. Open a normal web page (http/https) with a form.",
         });
         return;
       }
@@ -187,7 +189,7 @@ export default function App() {
           activeUrl: tab.url,
           plan: null,
           scanning: false,
-          scanError: "Fillin couldn't run on this page.",
+          scanError: "Couldn't inject Fillin into this page. Reload the page and try again.",
         });
         return;
       }
