@@ -28,7 +28,6 @@ import {
   selectFileForField,
   watchTab,
   onContentMessage,
-  isFillableUrl,
 } from "./host";
 import {
   getAnswers,
@@ -170,38 +169,34 @@ export default function App() {
       set({ settings, documents, profile, answers });
 
       const tab = await getActiveTab();
-      if (!tab?.id || !isFillableUrl(tab.url)) {
+      if (!tab?.id) {
         set({
-          activeTabId: tab?.id ?? null,
-          activeUrl: tab?.url ?? null,
+          activeTabId: null,
+          activeUrl: null,
           plan: null,
           scanning: false,
-          scanError: tab?.url?.startsWith("chrome")
-            ? "Switch to a web page with a form, then click Try again."
-            : "This page can't be filled. Open a normal web page (http/https) with a form.",
+          scanError: "No active tab found. Click on a web page first.",
         });
         return;
       }
+      set({ activeTabId: tab.id, activeUrl: tab.url ?? null });
+
       const ok = await ensureContentScript(tab.id);
       if (!ok) {
         set({
-          activeTabId: tab.id,
-          activeUrl: tab.url,
           plan: null,
           scanning: false,
-          scanError: "Couldn't inject Fillin into this page. Reload the page and try again.",
+          scanError: "Couldn't run Fillin on this page. It may be a restricted page (chrome://, edge://, Chrome Web Store). Try a regular website.",
         });
         return;
       }
       await watchTab(tab.id, true);
       const snapshot = await scanTab(tab.id);
-      if (!snapshot) {
+      if (!snapshot || snapshot.fields.length === 0) {
         set({
-          activeTabId: tab.id,
-          activeUrl: tab.url,
           plan: null,
           scanning: false,
-          scanError: "We couldn't read this page. Try reloading and opening Fillin again.",
+          scanError: "No form fields found on this page. Open a page with input fields and try again.",
         });
         return;
       }
@@ -218,8 +213,6 @@ export default function App() {
         ai: settings.aiEnabled ? currentAi : null,
       });
       set({
-        activeTabId: tab.id,
-        activeUrl: tab.url,
         snapshotTitle: snapshot.title,
         plan,
         scanning: false,

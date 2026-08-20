@@ -21,15 +21,20 @@ export async function ensureContentScript(tabId: number): Promise<boolean> {
     await chrome.tabs.sendMessage(tabId, { type: "FILLIN_PING" });
     return true;
   } catch {
-    try {
-      await chrome.scripting.executeScript({
-        target: { tabId },
-        files: ["content.js"],
-      });
-      return true;
-    } catch {
-      return false;
+    // Content script not present — ask background to inject.
+  }
+  try {
+    const res = await chrome.runtime.sendMessage({
+      type: "FILLIN_ENSURE_CONTENT",
+      tabId,
+    }) as { ok?: boolean; error?: string } | undefined;
+    if (res?.error) {
+      console.error("[Fillin] Background injection error:", res.error);
     }
+    return !!res?.ok;
+  } catch (err) {
+    console.error("[Fillin] Failed to message background:", err);
+    return false;
   }
 }
 
