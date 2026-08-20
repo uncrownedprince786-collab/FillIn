@@ -34,52 +34,70 @@ export class AIClient {
   private async post<T>(
     path: string,
     body: unknown,
-    schema: { parse(data: unknown): T }
+    schema: { parse(data: unknown): T },
+    retries = 2
   ): Promise<T> {
     if (!this.baseUrl) {
       throw new AIClientError("CONFIG", "No API server configured.");
     }
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 45_000);
-    let res: Response;
-    try {
-      res = await fetch(`${this.baseUrl}${path}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-        signal: controller.signal,
-      });
-    } catch (err) {
-      if (err instanceof Error && err.name === "AbortError") {
-        throw new AIClientError("NETWORK", "The request timed out.");
-      }
-      throw new AIClientError("OFFLINE", "We couldn't connect right now.", { cause: err });
-    } finally {
-      clearTimeout(timer);
-    }
 
-    if (!res.ok) {
-      let message = `The server returned ${res.status}.`;
+    let lastErr: unknown;
+    for (let attempt = 0; attempt <= retries; attempt++) {
+      if (attempt > 0) {
+        await new Promise((r) => setTimeout(r, 1500 * attempt));
+      }
+
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 45_000);
+      let res: Response;
       try {
-        const data = (await res.json()) as { error?: { message?: string } };
-        if (data.error?.message) message = data.error.message;
-      } catch {
-        /* keep default message */
+        res = await fetch(`${this.baseUrl}${path}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+          signal: controller.signal,
+        });
+      } catch (err) {
+        clearTimeout(timer);
+        if (err instanceof Error && err.name === "AbortError") {
+          lastErr = new AIClientError("NETWORK", "The request timed out.");
+          continue;
+        }
+        lastErr = new AIClientError("OFFLINE", "We couldn't connect right now.", { cause: err });
+        continue;
       }
-      if (res.status === 429) {
-        throw new AIClientError("NETWORK", "Too many requests. Please try again in a moment.");
-      }
-      throw new AIClientError("HTTP", message);
-    }
+      clearTimeout(timer);
 
-    try {
-      const data = (await res.json()) as unknown;
-      return schema.parse(data);
-    } catch (err) {
-      throw new AIClientError("VALIDATION", "The server returned an unexpected response.", {
-        cause: err,
-      });
+      if (res.status === 429 && attempt < retries) {
+        continue;
+      }
+
+      if (!res.ok) {
+        let message = `The server returned ${res.status}.`;
+        try {
+          const data = (await res.json()) as { error?: { message?: string } };
+          if (data.error?.message) message = data.error.message;
+        } catch {
+          /* keep default message */
+        }
+        if (res.status === 429) {
+          throw new AIClientError("NETWORK", "Too many requests. Please try again in a moment.");
+        }
+        throw new AIClientError("HTTP", message);
+      }
+
+      try {
+        const data = (await res.json()) as unknown;
+        return schema.parse(data);
+      } catch (err) {
+        throw new AIClientError("VALIDATION", "The server returned an unexpected response.", {
+          cause: err,
+        });
+      }
     }
+    throw lastErr instanceof AIClientError
+      ? lastErr
+      : new AIClientError("NETWORK", "We couldn't connect right now.");
   }
 
   async analyze(req: AiAnalyzeRequest): Promise<AiAnalyzeResponse> {

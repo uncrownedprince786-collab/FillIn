@@ -230,7 +230,7 @@ function collectCandidates(root: ParentNode): Element[] {
 }
 
 export function scanDocument(opts: ScanOptions = {}): FieldSnapshot {
-  let roots: ParentNode[] = opts.wholeDocument
+  const roots: ParentNode[] = opts.wholeDocument
     ? [document]
     : Array.from(document.forms);
   const fields: DetectedField[] = [];

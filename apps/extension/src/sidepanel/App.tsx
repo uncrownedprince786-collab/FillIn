@@ -139,6 +139,9 @@ export default function App() {
   const docService = docServiceRef.current;
   docService.setAi(ai);
 
+  const stateRef = useRef(state);
+  stateRef.current = state;
+
   const set = useCallback((patch: Partial<AppState>) => {
     setState((prev) => ({ ...prev, ...patch }));
   }, []);
@@ -249,13 +252,9 @@ export default function App() {
     return () => chrome.runtime.onMessage.removeListener(onTabChanged);
   }, [refresh, set]);
 
-  const fill = useCallback(async () => {
-    await fillWithOverrides({});
-  }, []);
-
   const fillWithOverrides = useCallback(
     async (overrides: Record<string, string>) => {
-      const { plan, activeTabId, snapshotTitle } = state;
+      const { plan, activeTabId, snapshotTitle } = stateRef.current;
       if (!plan || !activeTabId) return;
       set({ busy: true });
       try {
@@ -285,7 +284,7 @@ export default function App() {
         const report = await fillTab(activeTabId, merged);
         set({
           fillReport: report,
-          overrides: { ...state.overrides, ...overrides },
+          overrides: { ...stateRef.current.overrides, ...overrides },
           busy: false,
           snapshotTitle,
         });
@@ -299,8 +298,12 @@ export default function App() {
         set({ busy: false, scanError: "Filling failed. Please try again." });
       }
     },
-    [state, set, refresh, toast]
+    [set, refresh, toast]
   );
+
+  const fill = useCallback(async () => {
+    await fillWithOverrides({});
+  }, [fillWithOverrides]);
 
   const saveAnswerForField = useCallback(
     async (fieldId: string, question: string, value: string) => {
