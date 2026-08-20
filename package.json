@@ -1,0 +1,31 @@
+{
+  "name": "fillin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fillin — Forms, without the busywork. Chrome extension + Vercel API.",
+  "license": "UNLICENSED",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build:packages": "npm run build --workspace @fillin/schemas && npm run build --workspace @fillin/shared && npm run build --workspace @fillin/ai",
+    "build:web": "npm run build --workspace @fillin/web",
+    "build:extension": "npm run build --workspace @fillin/extension",
+    "build": "npm run build:packages && npm run build:web && npm run build:extension",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "fixtures": "node scripts/generate-fixtures.mjs",
+    "dev:web": "npm run dev --workspace @fillin/web"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "pdf-lib": "^1.17.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "version": 1,
+  "facts": [
+    {
+      "key": "personal.fullName",
+      "value": "Ayesha Malik",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "personal.firstName",
+      "value": "Ayesha",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "personal.lastName",
+      "value": "Malik",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "contact.email",
+      "value": "ayesha.malik@example.test",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "contact.phone",
+      "value": "+92 300 5550198",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "contact.linkedin",
+      "value": "https://linkedin.com/in/ayesha-malik",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "contact.website",
+      "value": "https://ayeshamalik.example.test",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "address.street",
+      "value": "14-A, Gulberg III",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "address.city",
+      "value": "Lahore",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "address.state",
+      "value": "Punjab",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "address.postalCode",
+      "value": "54000",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "address.country",
+      "value": "Pakistan",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "education.institution",
+      "value": "University of the Punjab",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "education.degree",
+      "value": "BS Computer Science",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "education.field",
+      "value": "Computer Science",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "education.gpa",
+      "value": "3.7",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "employment.company",
+      "value": "Nimbus Digital",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "employment.jobTitle",
+      "value": "Frontend Engineer",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "high",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "skill.list",
+      "value": "React",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "medium",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "skill.list",
+      "value": "TypeScript",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "medium",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "skill.list",
+      "value": "Node.js",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "medium",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "certification.list",
+      "value": "AWS Certified Cloud Practitioner",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "medium",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "language.list",
+      "value": "English",
+      "sources": [
+        {
+          "documentId": "resume.pdf",
+          "documentName": "resume.pdf"
+        }
+      ],
+      "confidence": "medium",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    },
+    {
+      "key": "financial.salaryExpected",
+      "value": "PKR 450,000 per month",
+      "sources": [
+        {
+          "documentId": "cover-letter.pdf",
+          "documentName": "cover-letter.pdf"
+        }
+      ],
+      "confidence": "medium",
+      "addedAt": 1787144950069,
+      "updatedAt": 1787144950069
+    }
+  ],
+  "conflicts": [],
+  "builtAt": 1787144950069
+}
