@@ -85,7 +85,7 @@ export default function SettingsView({ locked = false }: { locked?: boolean }) {
           onChange={(e) => setApiUrl(e.target.value)}
           onBlur={() => {
             if (apiUrl !== app.settings.apiBaseUrl) {
-              void app.patchSettings({ apiBaseUrl: apiUrl.trim() || "http://localhost:3000" });
+              void app.patchSettings({ apiBaseUrl: apiUrl.trim() || "https://fill-in-psi.vercel.app" });
             }
           }}
         />

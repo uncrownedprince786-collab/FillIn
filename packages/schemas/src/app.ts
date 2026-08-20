@@ -21,7 +21,7 @@ export const AppSettingsSchema = z.object({
 export type AppSettings = z.infer<typeof AppSettingsSchema>;
 
 export const DEFAULT_SETTINGS: AppSettings = {
-  apiBaseUrl: "http://localhost:3000",
+  apiBaseUrl: "https://fill-in-psi.vercel.app",
   passphraseSet: false,
   aiEnabled: true,
   autoExtract: true,
