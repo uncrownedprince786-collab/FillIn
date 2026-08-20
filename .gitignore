@@ -36,3 +36,6 @@ apps/extension/.vite/
 # Fixtures generated from fiction only. Real personal documents must never be
 # committed anywhere in this repository.
 fixtures/generated/
+
+# Vercel
+.vercel
